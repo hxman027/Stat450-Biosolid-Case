@@ -1,0 +1,87 @@
+---
+title: "Stat450BiosolidReport"
+author: "Harry Xu"
+date: '2018-01-27'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+
+
+```
+
+## Summary
+This project report aims to show the results 
+•Stands on its own to provide the reader with a clear capsule version of the report.
+• Focuses on a clear statement of the problem (a “big picture”), the key methodologies
+used and the main results.
+• Is less than 10% of the report (with 30% of the summary on the objectives, background,
+problem, and methods; 70% on data analysis, results and findings).
+• Uses the present tense; indicative mood.
+
+## Introduction
+• Stands on its own as a lead-in to present the report.
+• Does not summarize the report.
+• Does not detail the data analysis and results.
+• Provides a broad, general view of the topic and its background.
+• Includes a clear statement of the detailed objectives (the problem(s) the report intends
+to solve).
+• Summarizes the significance, scope and methodology.
+• Ends with an overview of the body sections.
+• Uses the present tense; indicative mood.
+
+## Results
+The data has n=43 observations, each observation is categorized by Species (ASAG, HECO, KOMA or LITT), Block (1,2,3 or 4), Treatment (Biosolids or Control), and has a plant coverages value. The main statistical methods used were ANOVA test and two-sample T-test. Specifically, ANOVA was used to find whether all species(without biosolids treatment) are equally effective, and whether all species(with biosolids treatment) are equally effective. Sample T-tests were used to find whether the population mean for a specific group's cover value is significantly differnt from another's. 
+
+The ANOVA for control group shows 
+The ANOVA for treatment group shows 
+
+• Describes the process of data analysis. ***
+
+• Reports the findings. ****
+• Uses the past tense to describe the data analysis process and the present tense to
+report findings.
+Note: Given the explorative nature of problem solving in statistics, **, ***, and **** can be integrated into a step-by-step problem solving process, beginning with data analysis and ending with findings.
+## Conclusions and Recommendations
+
+Note: Results here includes Data Analysis which can be a section by itself in a longer report.
+• Describes the data.
+• Describes the statistical methods used. **
+• Describes the process of data analysis. ***
+• Reports the findings. ****
+• Uses the past tense to describe the data analysis process and the present tense to
+report findings.
+Note: Given the explorative nature of problem solving in statistics, **, ***, and **** can be integrated into a step-by-step problem solving process, beginning with data analysis and ending with findings.
+
+
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+
+```{r}
+biosolid <- read.csv("soil_blocks.csv", header = T)
+controldata <- subset(biosolid, biosolid$Treatment == "Control")
+#str(controldata)
+(anova <- aov(y.avg ~ Species, data = controldata))
+summary(anova)
+
+treatmentdata <- subset(biosolid, biosolid$Treatment == "Biosolids")
+(anova2 <- aov(y.avg ~ Species, data = treatmentdata))
+summary(anova2)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure}
+
+
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
