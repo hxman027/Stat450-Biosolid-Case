@@ -68,10 +68,25 @@ controldata <- subset(biosolid, biosolid$Treatment == "Control")
 #str(controldata)
 (anova <- aov(y.avg ~ Species, data = controldata))
 summary(anova)
+#small p-value shows that for all control groups, at least one of the species's mean coverage is different than the others.
+
 
 treatmentdata <- subset(biosolid, biosolid$Treatment == "Biosolids")
 (anova2 <- aov(y.avg ~ Species, data = treatmentdata))
 summary(anova2)
+#small p-value shows that for all treatment groups, at least one of the species's mean coverage is different than the others.
+
+(pairwisec_control <- pairwise.t.test(controldata$y.avg, controldata$Species, p.adj= "bonferroni"))
+
+(pairwisec_treat <- pairwise.t.test(treatmentdata$y.avg, treatmentdata$Species, p.adj= "bonferroni"))
+
+asag <- subset(controldata, controldata$Species == "ASAG")
+heco <- subset(controldata, controldata$Species == "HECO")
+koma <- subset(controldata, controldata$Species == "KOMA")
+litt <- subset(controldata, controldata$Species == "LITT")
+
+(twosample <- (t.test(heco$y.avg, litt$y.avg)))
+
 ```
 
 ## Including Plots

@@ -161,7 +161,10 @@ controldata &lt;- subset(biosolid, biosolid$Treatment == &quot;Control&quot;)
 ## Residuals   12  468.3      39                     
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<pre class="r"><code>treatmentdata &lt;- subset(biosolid, biosolid$Treatment == &quot;Biosolids&quot;)
+<pre class="r"><code>#small p-value shows that for all control groups, at least one of the species's mean coverage is different than the others.
+
+
+treatmentdata &lt;- subset(biosolid, biosolid$Treatment == &quot;Biosolids&quot;)
 (anova2 &lt;- aov(y.avg ~ Species, data = treatmentdata))</code></pre>
 <pre><code>## Call:
 ##    aov(formula = y.avg ~ Species, data = treatmentdata)
@@ -179,6 +182,49 @@ controldata &lt;- subset(biosolid, biosolid$Treatment == &quot;Control&quot;)
 ## Residuals   12    438      36                     
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<pre class="r"><code>#small p-value shows that for all treatment groups, at least one of the species's mean coverage is different than the others.
+
+(pairwisec_control &lt;- pairwise.t.test(controldata$y.avg, controldata$Species, p.adj= &quot;bonferroni&quot;))</code></pre>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  controldata$y.avg and controldata$Species 
+## 
+##      ASAG    HECO    KOMA   
+## HECO 0.00036 -       -      
+## KOMA 1.00000 0.00092 -      
+## LITT 0.00011 1.00000 0.00026
+## 
+## P value adjustment method: bonferroni</code></pre>
+<pre class="r"><code>(pairwisec_treat &lt;- pairwise.t.test(treatmentdata$y.avg, treatmentdata$Species, p.adj= &quot;bonferroni&quot;))</code></pre>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  treatmentdata$y.avg and treatmentdata$Species 
+## 
+##      ASAG    HECO    KOMA   
+## HECO 7.0e-05 -       -      
+## KOMA 1       5.4e-05 -      
+## LITT 7.7e-10 1.2e-07 6.9e-10
+## 
+## P value adjustment method: bonferroni</code></pre>
+<pre class="r"><code>asag &lt;- subset(controldata, controldata$Species == &quot;ASAG&quot;)
+heco &lt;- subset(controldata, controldata$Species == &quot;HECO&quot;)
+koma &lt;- subset(controldata, controldata$Species == &quot;KOMA&quot;)
+litt &lt;- subset(controldata, controldata$Species == &quot;LITT&quot;)
+
+(twosample &lt;- (t.test(heco$y.avg, litt$y.avg)))</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  heco$y.avg and litt$y.avg
+## t = -0.59581, df = 5.9801, p-value = 0.5731
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -18.01346  10.96346
+## sample estimates:
+## mean of x mean of y 
+##   30.8875   34.4125</code></pre>
 </div>
 <div id="including-plots" class="section level2">
 <h2>Including Plots</h2>

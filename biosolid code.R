@@ -1,7 +1,7 @@
 #setwd("~/Desktop/STAT 450/Stat450-Biosolid-Case")
 biosolid <- read.csv("soil_blocks.csv", header = T)
 controldata <- subset(biosolid, biosolid$Treatment == "Control")
-str(controldata2)
+str(controldata)
 ### you can drop levels of treatment from dployR 
 #(sample mean takes away a df, need 3 to know the other)
 (anova <- aov(y.avg ~ Species, data = controldata))
@@ -30,4 +30,3 @@ combined <- c(heco, litt)
 mod <- lm(y.avg ~ Species, data = combined)
 
 linearM <- lm(y.avg ~ Species, data = controldata,)
-
