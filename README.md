@@ -1,3 +1,6 @@
-# Stat450_test
-First Tutorial repo
+# Stat450
+
+First Tutorial repository
+
+
 
